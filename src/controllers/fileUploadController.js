@@ -39,14 +39,14 @@ export const readFile = (req, res) => {
   const { file } = req.params;
   const filePath = path.join(__dirname, "../../uploads", file);
 
-  fs.readFile(filePath, (err) => {
+  fs.readFile(filePath, (err, data) => {
     if (err) {
       return res.status(400).json({
         message: "File not found",
         error: err.message,
       });
     } else {
-      return res.status(200).json({ message: "File read successfully" });
+      return res.status(200).json({ message: "File read successfully", data });
     }
   });
 };
